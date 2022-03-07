@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import TodoForm from './TodoForm';
-import TodoList from './TodoList';
+import { RiCloseCircleLine } from 'react-icons/ri'
+import { TiEdit } from 'react-icons/ti'
 
-function Todo() {
+function Todo({ todos, completeTodo }) {
     const [edit, setEdit] = useState({
         id: null,
         value: ''
     })
 
-    return TodoList.map((todo, index) => (
+    return todos.map((todo, index) => (
         <div
             className={todo.isComplete ? 'todo-row complete' : 'todo-row'} key={index}>
 
@@ -16,7 +17,8 @@ function Todo() {
                 {todo.text}
             </div>
             <div className='icons'>
-
+                <RiCloseCircleLine />
+                <TiEdit />
             </div>
         </div >
     ))
