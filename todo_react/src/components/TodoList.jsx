@@ -8,13 +8,14 @@ function TodoList() {
 
     const addTodo = todo => {
         if (!todo.text || /^\s*$/.test(todo.test)) {
-            return
+            return;
         }
 
         const newTodos = [todo, ...todos];
 
         setTodos(newTodos);
     };
+
 
     const completeTodo = id => {
         let updatedTodos = todos.map(todo => {
@@ -24,6 +25,23 @@ function TodoList() {
             return todo;
         });
         setTodos(updatedTodos);
+    };
+
+
+    const updateTodo = (todoId, newValue) => {
+        if (!newValue.text || /^\s*$/.test(newValue.test)) {
+            return
+        }
+        setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
+
+
+    }
+
+
+    const removeTodo = id => {
+        const removeArr = [...todos].filter(todo => todo.id !== id)
+
+        setTodos(removeArr)
     }
 
     return (
@@ -33,6 +51,8 @@ function TodoList() {
             <Todo
                 todos={todos}
                 completeTodo={completeTodo}
+                removeTodo={removeTodo}
+                updateTodo={updateTodo}
             />
         </div>
     )
